@@ -1,0 +1,30 @@
+
+# BEGIN WP Cloudflare Super Page Cache
+# 在「BEGIN WP Cloudflare Super Page Cache」与「END WP Cloudflare Super Page Cache」之间的指令（行）是
+# 动态生成的，只应被 WordPress 过滤器修改。
+# 任何对标记之间的指令的修改都会被覆盖。
+<IfModule mod_expires.c>
+ExpiresActive on
+ExpiresByType application/xml "access plus 0 seconds"
+ExpiresByType text/xsl "access plus 0 seconds"
+</IfModule>
+<FilesMatch "\.(xml|xsl)$">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+</IfModule>
+</FilesMatch>
+<FilesMatch "robots\.txt">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+</IfModule>
+</FilesMatch>
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_URI} ^(.*)?/wp-content/wp-cloudflare-super-page-cache/blog.vist4.org/debug.log(.*)$
+RewriteRule ^(.*)$ - [F]
+</IfModule>
+<FilesMatch "wp-cron.php">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+</IfModule>
+</FilesMatch>
+# END WP Cloudflare Super Page Cache
